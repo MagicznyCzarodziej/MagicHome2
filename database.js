@@ -3,6 +3,21 @@ const { MongoClient: mongo } = require('mongodb');
 
 // const log = new LogUpdater();
 
+const rooms = {
+  collection: undefined,
+  getList() {
+    return new Promise((resolve, reject) => {
+      const query = {};
+      const projection = { _id: 0 };
+      this.collection.find(query, projection).toArray().then((data) => {
+        resolve(data);
+      }).catch((err) => {
+        reject(err);
+      });
+    });
+  },
+};
+
 const lights = {
   collection: undefined,
   getState(id) {
@@ -34,11 +49,47 @@ const lights = {
       });
     });
   },
+  getList() {
+    return new Promise((resolve, reject) => {
+      const query = {};
+      const projection = { _id: 0, id: 1 };
+      this.collection.find(query, projection).toArray().then((data) => {
+        const list = data.map(light => light.id);
+        resolve(list);
+      }).catch((err) => {
+        reject(err);
+      });
+    });
+  },
+  updateState(id, state) {
+    return new Promise((resolve, reject) => {
+      const query = { id: parseInt(id, 10) };
+      const update = { $set: { state } };
+      this.collection.update(query, update).then(() => {
+        resolve(state);
+      }).catch((err) => {
+        reject(err);
+      });
+    });
+  },
+  updateRoom(id, state) {
+    return new Promise((resolve, reject) => {
+      const query = { room_id: parseInt(id, 10) };
+      const update = { $set: { state } };
+      const multi = { multi: true };
+      this.collection.update(query, update, multi).then(() => {
+        resolve();
+      }).catch((err) => {
+        reject(err);
+      });
+    });
+  },
 };
 
 class DB {
   constructor(url) {
     this.url = url;
+    this.rooms = rooms;
     this.lights = lights;
   }
 

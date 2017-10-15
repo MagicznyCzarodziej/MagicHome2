@@ -10,7 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.1",
-    "mongodb": "^2.2.31"
+    "mongodb": "^2.2.31",
+    "rpi-gpio-promise": "^1.1.0"
   },
   "devDependencies": {
     "eslint": "^4.8.0",
