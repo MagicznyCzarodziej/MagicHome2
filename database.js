@@ -61,6 +61,18 @@ const lights = {
       });
     });
   },
+  getPins() {
+    return new Promise((resolve, reject) => {
+      const query = {};
+      const projection = { _id: 0, pin: 1 };
+      this.collection.find(query, projection).toArray().then((data) => {
+        const list = data.map(light => light.pin);
+        resolve(list);
+      }).catch((err) => {
+        reject(err);
+      });
+    });
+  },
   updateState(id, state) {
     return new Promise((resolve, reject) => {
       const query = { id: parseInt(id, 10) };

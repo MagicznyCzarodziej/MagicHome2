@@ -9,12 +9,9 @@ const log = new LogUpdater();
 const DATABASE_URL = config.MONGO_URL;
 const db = new DB(DATABASE_URL);
 
-
+// Open light pins
 function setupLights() {
-  db.lights.getData().then((list) => {
-    log.update(list);
-    rpi.setup(list);
-  });
+  return rpi.setup([11, 12, 13]); // TODO: Get pins from getPins() promsie
 }
 
 function startExpress() {
@@ -27,9 +24,11 @@ db.connect().then((database) => {
   log.update('MongoDB | Connected to database');
   db.rooms.collection = database.collection('rooms');
   db.lights.collection = database.collection('lights');
-  setupLights();
-  startExpress();
+  setupLights().then(() => {
+    startExpress();
+  });
 }).catch((err) => {
+  log.update(err.message);
   log.update('MongoDB | Failed to connect to database');
 });
 
@@ -51,7 +50,7 @@ app.get('/rooms/list', (req, res) => {
 // Send lights list
 app.get('/lights/list', (req, res) => {
   db.lights.getList().then((data) => {
-    log.update('mHome R | Send lights list');
+    log.update('mHome L | Send lights list');
     res.send(data);
   }).catch((err) => {
     log.update(`MongoDB | ${err.message}`);
