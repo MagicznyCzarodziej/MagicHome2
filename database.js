@@ -1,7 +1,4 @@
 const { MongoClient: mongo } = require('mongodb');
-// const LogUpdater = require('./log.js');
-
-// const log = new LogUpdater();
 
 const rooms = {
   collection: undefined,
@@ -49,6 +46,18 @@ const lights = {
       });
     });
   },
+  getDataAll() {
+    return new Promise((resolve, reject) => {
+      const query = {};
+      const projection = { _id: 0 };
+      this.collection.find(query, projection).toArray().then((data) => {
+        if (data) resolve(data);
+        else reject(new Error('Lights not found'));
+      }).catch((err) => {
+        reject(err);
+      });
+    });
+  },
   getList() {
     return new Promise((resolve, reject) => {
       const query = {};
@@ -66,8 +75,26 @@ const lights = {
       const query = {};
       const projection = { _id: 0, pin: 1 };
       this.collection.find(query, projection).toArray().then((data) => {
-        const list = data.map(light => light.pin);
+        let list = data.map(light => light.pin);
+        list = [...new Set(list)];
         resolve(list);
+      }).catch((err) => {
+        reject(err);
+      });
+    });
+  },
+  getPin(id) {
+    return new Promise((resolve, reject) => {
+      const query = { id: parseInt(id, 10) };
+      const projection = { _id: 0, pin: 1 };
+      this.collection.findOne(query, projection).then((data) => {
+        let pin;
+        if (data) {
+          pin = data.pin;
+          resolve(pin);
+        } else {
+          reject(new Error(`Light not found (ID: ${id})`));
+        }
       }).catch((err) => {
         reject(err);
       });
@@ -98,11 +125,60 @@ const lights = {
   },
 };
 
+const thermometers = {
+  collection: undefined,
+  getList(roomId) {
+    return new Promise((resolve, reject) => {
+      const query = {};
+      const projection = { _id: 0, id: 1 };
+      this.collection.find(query, projection).toArray().then((data) => {
+        const list = data.map(thermometer => thermometer.id);
+        resolve(list);
+      }).catch((err) => {
+        reject(err);
+      });
+    });
+  },
+  getTemp(id) {
+    return new Promise((resolve, reject) => {
+      const query = { id: parseInt(id, 10) };
+      const projection = { temps: { $slice: -1 }, _id: 0, id: 0, description: 0 };
+      this.collection.findOne(query, projection).then((data) => {
+        let dateAndTemp;
+        if (data) {
+          dateAndTemp = data.temps[0];
+          resolve(dateAndTemp);
+        } else {
+          reject(new Error(`Therm ometer not found (ID: ${id})`));
+        }
+      }).catch((err) => {
+        reject(err);
+      });
+    });
+  },
+  getData(id) {
+    return new Promise((resolve, reject) => {
+      const query = { id: parseInt(id, 10) };
+      const projection = { _id: 0, device_id: 0, temps: 0 };
+      this.collection.findOne(query, projection).then((data) => {
+        if (data) {
+          resolve(data);
+        } else {
+          reject(new Error(`Thermometer not found (ID: ${id})`));
+        }
+      }).catch((err) => {
+        reject(err);
+      });
+    });
+  },
+};
+
 class DB {
   constructor(url) {
     this.url = url;
     this.rooms = rooms;
     this.lights = lights;
+    this.thermometers = thermometers;
   }
 
   connect() {
