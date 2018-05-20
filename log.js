@@ -1,9 +1,6 @@
-class LogUpdater {
-  constructor() {
-    this.counter = 1;
-    this.lastLog = '';
-  }
-
+const LogUpdater = {
+  counter: 1,
+  lastLog: '',
   update(text) {
     if (text === this.lastLog) {
       this.counter++;
@@ -16,7 +13,7 @@ class LogUpdater {
     }
 
     this.lastLog = text;
-  }
-}
+  },
+};
 
 module.exports = LogUpdater;

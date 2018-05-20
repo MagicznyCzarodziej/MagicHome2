@@ -1,0 +1,43 @@
+.chart-container {
+	width: 90%;
+	height: 450px;
+	/* margin: 60px auto 20px auto; */
+}
+#chart-header{
+	font-family: Raleway;
+	background-color: #21333e;
+	padding: 15px;
+	text-align: left;
+}
+#chart-name{
+	font-size: 30px;
+	color: #eee;
+}
+#chart-box{
+	background-color: #253a47;
+	padding: 20px;
+	height: 100%;
+}
+#chart {
+	width: 100%;
+	height: 100%;
+	font-size: 14px;
+	line-height: 1.2em;
+
+}
+#hovered-temp{
+	color: #ffffff;
+	text-align: center;
+	position: fixed;
+	right: 10px;
+}
+
+#last-update{
+	color: #c2c2c2;
+	line-height: 40px;
+	float: right;
+	font-size: 25px;
+}
+.legend table {
+	border-spacing: 5px;
+}

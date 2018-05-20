@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="./css/main.css">
+  <link rel="stylesheet" href="./css/items.css">
+  <link rel="stylesheet" href="./assets/fonts/awesome/css/font-awesome.min.css">
+  <script src="./js/jquery-3.2.1.min.js"></script>
+  <script src="./js/cookie.js"></script>
+  <script src="./js/error.js"></script>
+  <script src="./js/config.js"></script>
+  <script src="./js/settings.js"></script>
+
+  <title>MagicHome2</title>
+</head>
+<body>
+  <div id="menu">
+      <div id="menu-header">MagicHome</div>
+      <div class="menu-item" id="menu-dashboard"><a href="./index.html"><i class="fa fa-th"></i>Dashboard</a></div>
+      <div class="menu-item" id="menu-thermometers"><a href="./temps.html"><i class="fa fa-thermometer-half"></i>Temperatury</a></div>
+      <div class="menu-item menu-selected" id="menu-settings"><a href="./settings.html"><i class="fa fa-sliders"></i>Ustawienia</a></div>
+      <div id="menu-spacer"></div>
+      <div id="light-update-indicator" class="fa fa-circle" style="display: none;"></div>
+      <div id="light-switch-indicator" class="fa fa-circle" style="display: none;"></div>
+      <div id="menu-time">
+        <script src="./js/clock.js"></script>
+      </div>
+  </div>
+  <div id="container">
+    <div id="header"><i class="fa fa-sliders"></i>Ustawienia</div>
+    <div id="content">
+      <div class="box">
+        <div class="box-content">
+          <div class="setting"><label for="API_IP">API IP</label><input name="API_IP" type="text" placeholder="http://ip:port" size="1"></div>
+          <div class="setting"><label for="LIGHTS_REFRESH_TIME">Czas odświeżania świateł</label><input name="LIGHTS_REFRESH_TIME" type="text" placeholder="ms"  size="1"></div>
+          <div class="setting"><label for="THERMOMETERS_REFRESH_TIME">Czas odświeżania termometrów</label><input name="THERMOMETERS_REFRESH_TIME" type="text" placeholder="ms"  size="1"></div>
+        </div>
+        <div id="save-button">Zapisz</div>
+      </div>
+      <div id="messages"></div>
+    </div>
+  </div>
+</body>
+</html>
+<script src="http://localhost:35729/livereload.js"></script>

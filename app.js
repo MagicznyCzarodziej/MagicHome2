@@ -1,11 +1,10 @@
 const config = require('./config.js');
 const express = require('express');
-const LogUpdater = require('./log.js');
+const log = require('./log.js');
 const DB = require('./database.js');
 const rpi = require('./gpio.js');
 
 const app = express();
-const log = new LogUpdater();
 const DATABASE_URL = config.MONGO_URL;
 const db = new DB(DATABASE_URL);
 

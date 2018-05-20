@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="./css/main.css">
+  <link rel="stylesheet" href="./css/temps.css">
+  <link rel="stylesheet" href="./css/chart.css">
+  <link rel="stylesheet" href="./assets/fonts/awesome/css/font-awesome.min.css">
+  <script language="javascript" type="text/javascript" src="./js/flot/jquery.js"></script>
+  <script language="javascript" type="text/javascript" src="./js/flot/jquery.flot.js"></script>
+  <script language="javascript" type="text/javascript" src="./js/flot/jquery.flot.time.js"></script>
+  <script language="javascript" type="text/javascript" src="./js/flot/jquery.flot.selection.js"></script>
+  <script language="javascript" type="text/javascript" src="./js/flot/jquery.flot.crosshair.js"></script>
+  <script language="javascript" type="text/javascript" src="./js/flot/curvedLines.js"></script>
+  <script src="./js/cookie.js"></script>
+  <script src="./js/error.js"></script>
+  <script src="./js/config.js"></script>
+  <script src="./js/temps.js"></script>
+  <title>MagicHome2</title>
+</head>
+<body>
+  <div id="menu">
+      <div id="menu-header">MagicHome</div>
+      <div class="menu-item" id="menu-dashboard"><a href="./index.html"><i class="fa fa-th"></i>Dashboard</a></div>
+      <div class="menu-item menu-selected" id="menu-thermometers"><a href="./temps.html"><i class="fa fa-thermometer-half"></i>Temperatury</a></div>
+      <div class="menu-item" id="menu-settings"><a href="./settings.html"><i class="fa fa-sliders"></i>Ustawienia</a></div>
+      <div id="menu-spacer"></div>
+      <div id="menu-time">
+        <script src="./js/clock.js"></script>
+      </div>
+  </div>
+  <div id="container">
+    <div id="header"><i class="fa fa-th"></i>Temperatury</div>
+    <div id="content">
+      <div id="board">
+        <div class="thermometers-list">
+          <div class="thermometers-list-header">Termometr</div>
+          <select>
+            <option value="">Salon - Dwór</option>
+            <option value="">Salon - Powietrze</option>
+            <option value="">Pokój - Powietrze</option>
+            <option value="">Łazienka - Powietrze</option>
+          </select>
+        </div>
+        <div class="chart-container">
+          <div id="chart-header"><span id="chart-name">Powietrze 23&#176;C</span><span id="last-update">Ostatni pomiar: 3 min. temu</span></div>
+          <div id="chart-box">
+    			  <div id="chart"></div>
+          </div>
+  		  </div>
+        <div id="hovered-temp"></div>
+      </div>
+      <div id="messages"></div>
+    </div>
+  </div>
+</body>
+</html>
+
+<script src="http://localhost:35729/livereload.js"></script>

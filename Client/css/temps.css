@@ -1,0 +1,27 @@
+.thermometers-list {
+  margin-bottom: 40px;
+}
+.thermometers-list select {
+  height: 50px;
+  width: 350px;
+  font-family: Raleway;
+  font-size: 25px;
+  color: #ccc;
+  background-color: #253a47;
+  border: none;
+  padding-left: 10px;
+  text-align-last:center;
+}
+.thermometers-list option {
+  background-color: #253a47;
+}
+.thermometers-list-header {
+  color: #ccc;
+  font-family: Raleway;
+  font-size: 30px;
+  background-color: #21333e;
+  padding: 0 15px;
+  line-height: 50px;
+  height: 50px;
+  float: left;
+}
